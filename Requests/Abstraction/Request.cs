@@ -18,18 +18,25 @@ public abstract class Request
         ShowMessage = showMessage;
         Browser = browser;
         RequestAddress = string.Empty;
+        RequestArgs = new List<string>();
     }
 
     protected abstract string RequestString { get; }
+    protected IEnumerable<string> RequestArgs { get; set; }
     protected virtual bool IsRequestFor(string input)
     {
         return RequestString.Contains(input.ToLower());
     }
-    public async Task<HttpStatusCode> SendRequest()
+    public async Task<HttpStatusCode> SendRequestAsync()
     {
         return await InternalRequest();
     }
+    public virtual void ImportRequestArgs(string request, char separator)
+    {
+        var args = request.Split(separator).ToList();
 
+        RequestArgs = args;
+    }
     protected abstract Task<HttpStatusCode> InternalRequest();
 
     public static Func<IServiceProvider, Func<string, Request>> GetRequest =>

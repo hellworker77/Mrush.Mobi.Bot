@@ -20,8 +20,8 @@ public class ParserMainPage : Parser
             Document.LoadHtml(responseHtml);
             var document = Document.DocumentNode;
             var cssSelector = ".mbtn";
-            var lairNameNode = document.QuerySelector(cssSelector);
-            if (lairNameNode != null)
+            var node = document.QuerySelector(cssSelector);
+            if (node != null)
             {
                 result = true;
             }

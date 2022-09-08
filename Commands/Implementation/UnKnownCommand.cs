@@ -10,7 +10,6 @@ public class UnKnownCommand : Command
     }
 
     protected override string CommandString => string.Empty;
-    protected override IEnumerable<string>? CommandArgs { get; set; }
     protected override bool IsCommandFor(string input)
     {
         return true;

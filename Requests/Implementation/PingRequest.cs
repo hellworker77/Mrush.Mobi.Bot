@@ -17,11 +17,11 @@ public class PingRequest : Request
         _parserFactory = parserFactory;
     }
 
-    protected override string RequestString => string.Empty;
+    protected override string RequestString => "ping";
 
     protected override bool IsRequestFor(string input)
     {
-        return true;
+        return RequestString == input;
     }
 
     protected override async Task<HttpStatusCode> InternalRequest()
@@ -40,6 +40,7 @@ public class PingRequest : Request
         {
             ShowMessage.ShowInfo("You are not authorized");
         }
+        Browser.SetLastResponse(response);
         
 
         return await Task.FromResult(response.StatusCode);

@@ -11,10 +11,11 @@ public abstract class Command
     {
         IsTerminatingCommand = false;
         ShowMessage = showMessage;
+        CommandArgs = new List<string>();
     }
 
     protected abstract string CommandString { get; }
-    protected abstract IEnumerable<string>? CommandArgs { get; set; }
+    protected IEnumerable<string> CommandArgs { get; set; }
     protected virtual bool IsCommandFor(string input)
     {
         return CommandString.Contains(input.ToLower());

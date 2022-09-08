@@ -32,6 +32,5 @@ public class Browser : IBrowser
     public void SetLastResponse(HttpResponseMessage response)
     {
         Response = response;
-        _showMessage.ShowInfo("Got response...");
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Core.Abstraction.Interfaces;
+﻿namespace Host.Abstraction.Interfaces;
 
 public interface IRuntime
 {

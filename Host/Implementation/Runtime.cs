@@ -1,8 +1,8 @@
 ﻿using Commands.Abstraction;
-using Core.Abstraction.Interfaces;
 using Domain.Abstraction.Interfaces;
+using Host.Abstraction.Interfaces;
 
-namespace Core.Implementation;
+namespace Host.Implementation;
 
 public class Runtime : IRuntime
 {
@@ -34,8 +34,8 @@ public class Runtime : IRuntime
     public async Task InitializeAsync()
     {
         _timer.UpdateDelay(5000);
-        
-        var taskReadCommandFromConsole =  ReadCommandFromConsoleAsync();
+
+        var taskReadCommandFromConsole = ReadCommandFromConsoleAsync();
         _timer.TargetMethod = RunAsync;
 
         var runtime = Task.WhenAll(_timer.StartAsync(), taskReadCommandFromConsole);
@@ -55,12 +55,12 @@ public class Runtime : IRuntime
             _showMessage.ShowAsUser(nextCommand);
 
             await ApplyCommand(nextCommand);
-            
+
         }
     }
     private async Task RunCommandAsync(string currentCommand)
     {
-        var separator = ' ';
+        var separator = '|';
         var command = _commandFactory(currentCommand);
 
         command.ImportCommandArgs(currentCommand, separator);

@@ -14,14 +14,11 @@ public class PingCommand : Command
     }
 
     protected override string CommandString => "/ping";
-    protected override IEnumerable<string>? CommandArgs { get; set; }
     protected override async Task<bool> InternalCommand()
     {
         var request = _requestFactory("ping");
 
-        var statusCode = await request.SendRequest();
-
-        
+        var statusCode = await request.SendRequestAsync();
 
         ShowMessage.ShowInfo($"pinged with code {statusCode}");
 
