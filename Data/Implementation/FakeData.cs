@@ -9,8 +9,8 @@ public static class FakeData
     {
         new AccountEntity
         {
-            Login = "секси tt",
-            Password = "anarms1890",
+            Login = "name",
+            Password = "password",
             User = Users.First(),
         }
     };
