@@ -4,14 +4,152 @@
     "C:\\Users\\iljap\\source\\repos\\git\\Hellworker.Bot\\Host\\Host.csproj": {}
   },
   "projects": {
-    "C:\\Users\\iljap\\source\\repos\\git\\Hellworker.Bot\\Host\\Host.csproj": {
+    "C:\\Users\\iljap\\source\\repos\\git\\Hellworker.Bot\\Commands\\Commands.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\iljap\\source\\repos\\git\\Hellworker.Bot\\Host\\Host.csproj",
-        "projectName": "Host",
-        "projectPath": "C:\\Users\\iljap\\source\\repos\\git\\Hellworker.Bot\\Host\\Host.csproj",
+        "projectUniqueName": "C:\\Users\\iljap\\source\\repos\\git\\Hellworker.Bot\\Commands\\Commands.csproj",
+        "projectName": "Commands",
+        "projectPath": "C:\\Users\\iljap\\source\\repos\\git\\Hellworker.Bot\\Commands\\Commands.csproj",
         "packagesPath": "C:\\Users\\iljap\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\iljap\\source\\repos\\git\\Hellworker.Bot\\Host\\obj\\",
+        "outputPath": "C:\\Users\\iljap\\source\\repos\\git\\Hellworker.Bot\\Commands\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\iljap\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\iljap\\source\\repos\\git\\Hellworker.Bot\\Domain\\Domain.csproj": {
+                "projectPath": "C:\\Users\\iljap\\source\\repos\\git\\Hellworker.Bot\\Domain\\Domain.csproj"
+              },
+              "C:\\Users\\iljap\\source\\repos\\git\\Hellworker.Bot\\Requests\\Requests.csproj": {
+                "projectPath": "C:\\Users\\iljap\\source\\repos\\git\\Hellworker.Bot\\Requests\\Requests.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\iljap\\source\\repos\\git\\Hellworker.Bot\\Core\\Core.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\iljap\\source\\repos\\git\\Hellworker.Bot\\Core\\Core.csproj",
+        "projectName": "Core",
+        "projectPath": "C:\\Users\\iljap\\source\\repos\\git\\Hellworker.Bot\\Core\\Core.csproj",
+        "packagesPath": "C:\\Users\\iljap\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\iljap\\source\\repos\\git\\Hellworker.Bot\\Core\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\iljap\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\iljap\\source\\repos\\git\\Hellworker.Bot\\Commands\\Commands.csproj": {
+                "projectPath": "C:\\Users\\iljap\\source\\repos\\git\\Hellworker.Bot\\Commands\\Commands.csproj"
+              },
+              "C:\\Users\\iljap\\source\\repos\\git\\Hellworker.Bot\\Domain\\Domain.csproj": {
+                "projectPath": "C:\\Users\\iljap\\source\\repos\\git\\Hellworker.Bot\\Domain\\Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\iljap\\source\\repos\\git\\Hellworker.Bot\\Domain\\Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\iljap\\source\\repos\\git\\Hellworker.Bot\\Domain\\Domain.csproj",
+        "projectName": "Domain",
+        "projectPath": "C:\\Users\\iljap\\source\\repos\\git\\Hellworker.Bot\\Domain\\Domain.csproj",
+        "packagesPath": "C:\\Users\\iljap\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\iljap\\source\\repos\\git\\Hellworker.Bot\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -44,6 +182,186 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "Fizzler.Systems.HtmlAgilityPack": {
+              "target": "Package",
+              "version": "[1.2.1, )"
+            },
+            "HtmlAgilityPack": {
+              "target": "Package",
+              "version": "[1.11.45, )"
+            },
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\iljap\\source\\repos\\git\\Hellworker.Bot\\Host\\Host.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\iljap\\source\\repos\\git\\Hellworker.Bot\\Host\\Host.csproj",
+        "projectName": "Host",
+        "projectPath": "C:\\Users\\iljap\\source\\repos\\git\\Hellworker.Bot\\Host\\Host.csproj",
+        "packagesPath": "C:\\Users\\iljap\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\iljap\\source\\repos\\git\\Hellworker.Bot\\Host\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\iljap\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\iljap\\source\\repos\\git\\Hellworker.Bot\\Commands\\Commands.csproj": {
+                "projectPath": "C:\\Users\\iljap\\source\\repos\\git\\Hellworker.Bot\\Commands\\Commands.csproj"
+              },
+              "C:\\Users\\iljap\\source\\repos\\git\\Hellworker.Bot\\Core\\Core.csproj": {
+                "projectPath": "C:\\Users\\iljap\\source\\repos\\git\\Hellworker.Bot\\Core\\Core.csproj"
+              },
+              "C:\\Users\\iljap\\source\\repos\\git\\Hellworker.Bot\\Requests\\Requests.csproj": {
+                "projectPath": "C:\\Users\\iljap\\source\\repos\\git\\Hellworker.Bot\\Requests\\Requests.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[11.0.1, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.8, )"
+            },
+            "Microsoft.EntityFrameworkCore.Proxies": {
+              "target": "Package",
+              "version": "[6.0.8, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[6.0.8, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.8, )"
+            },
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\iljap\\source\\repos\\git\\Hellworker.Bot\\Requests\\Requests.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\iljap\\source\\repos\\git\\Hellworker.Bot\\Requests\\Requests.csproj",
+        "projectName": "Requests",
+        "projectPath": "C:\\Users\\iljap\\source\\repos\\git\\Hellworker.Bot\\Requests\\Requests.csproj",
+        "packagesPath": "C:\\Users\\iljap\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\iljap\\source\\repos\\git\\Hellworker.Bot\\Requests\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\iljap\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\iljap\\source\\repos\\git\\Hellworker.Bot\\Domain\\Domain.csproj": {
+                "projectPath": "C:\\Users\\iljap\\source\\repos\\git\\Hellworker.Bot\\Domain\\Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
