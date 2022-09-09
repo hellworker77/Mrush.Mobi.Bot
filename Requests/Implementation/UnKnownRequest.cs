@@ -17,9 +17,9 @@ public class UnKnownRequest : Request
         return true;
     }
 
-    protected override async Task<HttpStatusCode> InternalRequest()
+    protected override async Task<bool> InternalRequest()
     {
-        var result = HttpStatusCode.NotImplemented;
+        var result = true;
 
         ShowMessage.ShowError("Not found request");
 

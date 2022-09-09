@@ -4,9 +4,9 @@ using Fizzler.Systems.HtmlAgilityPack;
 
 namespace Domain.Implementation.Parsers;
 
-public class UnKnownParser : Parser
+public class ParserPing : Parser
 {
-    public UnKnownParser(IShowMessage showMessage) : base(showMessage)
+    public ParserPing(IShowMessage showMessage) : base(showMessage)
     {
 
     }
@@ -15,13 +15,15 @@ public class UnKnownParser : Parser
     {
         var result = false;
 
+        result = !response.Contains("welcome");
+        
         return result;
     }
 
     protected override bool IsParserFor(string parserName)
     {
-        return true;
+        return parserName == ParserString;
     }
 
-    protected override string ParserString => string.Empty;
+    protected override string ParserString => "ping";
 }

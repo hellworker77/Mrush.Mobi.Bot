@@ -15,6 +15,16 @@ public class Browser : IBrowser
         Initialize();
     }
 
+    public string GetResponseUriAsString()
+    {
+        var result = Response?.RequestMessage?.RequestUri?.AbsoluteUri ?? string.Empty;
+        return result;
+    }
+    public string GetResponseMethodAsString()
+    {
+        var result = Response?.RequestMessage?.Method.ToString() ?? string.Empty;
+        return result;
+    }
     public void Initialize()
     {
         _cookies = new CookieContainer();
@@ -24,13 +34,16 @@ public class Browser : IBrowser
         _client = new HttpClient();
         _showMessage.ShowInfo("HttpClient initialized...");
     }
+    public void SetLastResponse(HttpResponseMessage response)
+    {
+        Response = response;
+    }
+
+    
 
     public HttpClient Client => _client;
 
     public HttpResponseMessage Response { get; private set; }
 
-    public void SetLastResponse(HttpResponseMessage response)
-    {
-        Response = response;
-    }
+    
 }

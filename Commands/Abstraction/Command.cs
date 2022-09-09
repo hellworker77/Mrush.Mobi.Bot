@@ -28,6 +28,7 @@ public abstract class Command
 
         CommandArgs = args;
     }
+
     public async Task<(bool wasSuccessful, bool shouldQuit)> RunCommand()
     {
         return (await InternalCommand(), IsTerminatingCommand);

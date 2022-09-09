@@ -24,25 +24,19 @@ public class PingRequest : Request
         return RequestString == input;
     }
 
-    protected override async Task<HttpStatusCode> InternalRequest()
+    protected override async Task<bool> InternalRequest()
     {
         var response = await Browser.Client.GetAsync(RequestAddress);
         var content = await response.Content.ReadAsStringAsync();
 
         var parser = _parserFactory("ping");
         parser.Initialize();
-        var parserResult = parser.Parse(content);
-        if (parserResult == true)
-        {
-            ShowMessage.ShowInfo("You are authorized");
-        }
-        else
-        {
-            ShowMessage.ShowInfo("You are not authorized");
-        }
-        Browser.SetLastResponse(response);
-        
 
-        return await Task.FromResult(response.StatusCode);
+        Browser.SetLastResponse(response);
+
+        var responseUri = Browser.GetResponseUriAsString();
+        var parserResult = parser.Parse(responseUri);
+
+        return await Task.FromResult(parserResult);
     }
 }

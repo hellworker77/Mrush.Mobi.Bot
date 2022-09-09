@@ -37,13 +37,14 @@ public class AccountRepository : IAccountRepository
     {
         var entity = _mapper.Map<AccountEntity>(account);
 
-        var existsEntity = await _applicationContext.Accounts.Include(x=>x.User).AsNoTracking().FirstOrDefaultAsync(x => x.Id == entity.Id);
+        var trackedEntity = await _dbSet.FindAsync(entity.Id);
 
-        if (existsEntity != null)
+        if (trackedEntity != null)
         {
-            entity.User = existsEntity.User;
+            trackedEntity.Login = entity.Login;
+            trackedEntity.Password = entity.Password;
 
-            _dbSet.Update(entity);
+            _dbSet.Update(trackedEntity);
 
             await _applicationContext.SaveChangesAsync();
         }

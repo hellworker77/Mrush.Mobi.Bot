@@ -27,7 +27,7 @@ public abstract class Request
     {
         return RequestString.Contains(input.ToLower());
     }
-    public async Task<HttpStatusCode> SendRequestAsync()
+    public async Task<bool> SendRequestAsync()
     {
         return await InternalRequest();
     }
@@ -37,7 +37,7 @@ public abstract class Request
 
         RequestArgs = args;
     }
-    protected abstract Task<HttpStatusCode> InternalRequest();
+    protected abstract Task<bool> InternalRequest();
 
     public static Func<IServiceProvider, Func<string, Request>> GetRequest =>
         provider => input =>

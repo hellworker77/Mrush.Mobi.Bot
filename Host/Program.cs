@@ -77,6 +77,8 @@ class Program
         var mapper = mapperConfiguration.CreateMapper();
         services.AddSingleton(mapper);
 
+        services.AddTransient<Command, ShutdownCommand>();
+        services.AddTransient<Command, AddAccountCommand>();
         services.AddTransient<Command, AddUserCommand>();
         services.AddTransient<Command, SignInCommand>();
         services.AddTransient<Command, PingCommand>();
@@ -88,7 +90,7 @@ class Program
         services.AddTransient<Request, UnKnownRequest>();
         services.AddTransient(Request.GetRequest);
 
-        services.AddTransient<Parser, ParserMainPage>();
+        services.AddTransient<Parser, ParserPing>();
         services.AddTransient<Parser, UnKnownParser>();
         services.AddTransient(Parser.GetParser);
 

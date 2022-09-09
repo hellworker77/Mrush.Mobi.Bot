@@ -14,7 +14,7 @@ public class DetourAntiBotSystem : IDetourAntiBotSystem
         _document = new HtmlDocument();
     }
 
-    public async Task<string> FindDynamicKeyAsync(string response)
+    public async Task<string> FindExternalKeyAsync(string response)
     {
         _document.LoadHtml(response);
 
@@ -28,9 +28,13 @@ public class DetourAntiBotSystem : IDetourAntiBotSystem
         {
             var nodeInfo = node.InnerHtml.Split('.')[1];
 
-            if (shorterNode == string.Empty || (shorterNode.Length > nodeInfo.Length && !nodeInfo.Contains("overflow: hidden;")))
+            if (shorterNode == string.Empty || shorterNode.Length > nodeInfo.Length)
             {
-                shorterNode = nodeInfo;
+                if (!nodeInfo.Contains("overflow: hidden;"))
+                {
+                    shorterNode = nodeInfo;
+                }
+                
             }
         });
 
@@ -38,37 +42,35 @@ public class DetourAntiBotSystem : IDetourAntiBotSystem
 
         return await Task.FromResult(dynamicKey);
     }
-
-    public async Task<string> FindStaticKeyAsync(string dynamicKey)
+    public async Task<string> FindInternalKeyAsync(string externalKey)
     {
-        var staticKey = string.Empty;
+        var internalKey = string.Empty;
         try
         {
             var document = _document.DocumentNode;
 
-            var nodes = document.QuerySelectorAll($".{dynamicKey}");
+            var nodes = document.QuerySelectorAll($".{externalKey}");
 
             nodes = nodes.ToList().FirstOrDefault().QuerySelectorAll("label input");
 
             foreach (var node in nodes)
             {
-                var foundKey = TryToFindKey(node.Attributes);
+                var foundKey = PullKey(node.Attributes);
                 if (foundKey != string.Empty)
                 {
-                    staticKey = foundKey;
-                    _showMessage.ShowSuccessful("Found secret key ");
+                    internalKey = foundKey;
                 }
             }
         }
         catch (FormatException ex)
         {
             _showMessage.ShowError($"{ex.Message}");
-            _showMessage.ShowError("Not hacked login page(...");
+            _showMessage.ShowError("Not hacked login page...");
         }
 
-        return await Task.FromResult(staticKey);
+        return await Task.FromResult(internalKey);
     }
-    private string TryToFindKey(HtmlAttributeCollection attributes)
+    private string PullKey(HtmlAttributeCollection attributes)
     {
         var foundKey = string.Empty;
 

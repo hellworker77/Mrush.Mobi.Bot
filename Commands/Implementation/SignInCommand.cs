@@ -7,10 +7,13 @@ namespace Commands.Implementation;
 public class SignInCommand : Command
 {
     private readonly Func<string, Request> _requestFactory;
+    private readonly IBrowser _browser;
     public SignInCommand(IShowMessage showMessage,
-        Func<string, Request> requestFactory) : base(showMessage)
+        Func<string, Request> requestFactory,
+        IBrowser browser) : base(showMessage)
     {
         _requestFactory = requestFactory;
+        _browser = browser;
     }
     protected override string CommandString => "signIn";
     protected override bool IsCommandFor(string input)
@@ -32,9 +35,18 @@ public class SignInCommand : Command
 
         request.ImportRequestArgs($"{name}|{password}", '|');
 
-        var statusCode = await request.SendRequestAsync();
+        var requestResult = await request.SendRequestAsync();
 
-        ShowMessage.ShowInfo($"Request returned {statusCode}");
+        if (requestResult)
+        {
+            ShowMessage.ShowInfo($"Your are authorized");
+        }
+        else
+        {
+            ShowMessage.ShowInfo($"Your are not authorized");
+        }
+
+        
 
         return true;
     }

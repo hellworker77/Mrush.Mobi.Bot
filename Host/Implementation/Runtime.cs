@@ -66,6 +66,8 @@ public class Runtime : IRuntime
         command.ImportCommandArgs(currentCommand, separator);
 
         var response = await command.RunCommand();
+
+        IsRunning = !response.shouldQuit;
     }
     public bool IsRunning
     {
