@@ -1,4 +1,5 @@
 ﻿using Commands.Abstraction;
+using Commands.Models;
 using Domain.Abstraction.Interfaces;
 
 namespace Commands.Implementation;
@@ -15,10 +16,14 @@ public class UnKnownCommand : Command
         return true;
     }
 
-    protected override async Task<bool> InternalCommand()
+    protected override async Task<CommandResult> InternalCommandExecute()
     {
-       ShowMessage.ShowAsConsole("Not found command");
-       return await Task.FromResult(true);
+        var result = new CommandResult
+        {
+            IsSuccessful = false,
+            Message = "Unknow command"
+        };
+        return await Task.FromResult(result);
     }
 
    

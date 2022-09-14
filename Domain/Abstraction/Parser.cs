@@ -16,7 +16,7 @@ public abstract class Parser
     {
         Document = new HtmlDocument();
     }
-    public abstract bool Parse(string response);
+    public abstract string Parse(string response);
 
     protected virtual bool IsParserFor(string parserName)
     {

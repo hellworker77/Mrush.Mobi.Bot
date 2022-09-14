@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using Domain.Abstraction;
 using Domain.Abstraction.Interfaces;
+using Newtonsoft.Json;
 using Requests.Abstraction;
 
 namespace Requests.Implementation;
@@ -10,9 +11,9 @@ public class SignInRequest : Request
     private readonly IDetourAntiBotSystem _detourAntiBotSystem;
     private readonly Func<string, Parser> _parserFactory;
     public SignInRequest(IShowMessage showMessage, 
-        IBrowser browser,
+        IWebDriver webDriver,
         IDetourAntiBotSystem detourAntiBotSystem,
-        Func<string, Parser> parserFactory) : base(showMessage, browser)
+        Func<string, Parser> parserFactory) : base(showMessage, webDriver)
     {
         RequestAddress = "https://mrush.mobi/login";
         _detourAntiBotSystem = detourAntiBotSystem;
@@ -25,15 +26,15 @@ public class SignInRequest : Request
     {
         return RequestString == input;
     }
-    protected override async Task<bool> InternalRequest()
+    protected override async Task<string> InternalRequestExecute()
     {
         var login = RequestArgs.ElementAt(0);
         var password = RequestArgs.ElementAt(1);
 
-        var lastResponse = Browser.Response;
+        var lastResponse = WebDriver.Response;
         if (lastResponse == null)
         {
-            return false;
+            return string.Empty;
         }
 
         var content = await lastResponse.Content.ReadAsStringAsync();
@@ -42,16 +43,15 @@ public class SignInRequest : Request
         var internalKey = await _detourAntiBotSystem.FindInternalKeyAsync(externalKey);
 
         var formContent = GetFormContent(login, password, internalKey);
-        var response = await Browser.Client.PostAsync(RequestAddress, formContent);
+        var response = await WebDriver.Client.PostAsync(RequestAddress, formContent);
 
-        Browser.SetLastResponse(response);
+        WebDriver.SetLastResponse(response);
 
         var parser = _parserFactory("ping");
         parser.Initialize();
 
-        var responseUri = Browser.GetResponseUriAsString();
+        var responseUri = WebDriver.GetResponseUriAsString();
         var parserResult = parser.Parse(responseUri);
-
         return await Task.FromResult(parserResult);
     }
 

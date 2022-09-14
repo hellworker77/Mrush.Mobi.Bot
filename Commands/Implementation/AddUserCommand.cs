@@ -1,4 +1,5 @@
 ﻿using Commands.Abstraction;
+using Commands.Models;
 using Core.Abstraction.Interfaces;
 using Domain.Abstraction.Interfaces;
 using Domain.Models;
@@ -21,16 +22,20 @@ public class AddUserCommand : Command
         return input.Contains(CommandString);
     }
 
-    protected override async Task<bool> InternalCommand()
+    protected override async Task<CommandResult> InternalCommandExecute()
     {
-        long telegramId = 0;
+        var result = new CommandResult
+        {
+            IsSuccessful = false,
+            Message = "User didn't sign in"
+        };
+        long telegramId;
 
         var resultParsing = long.TryParse(CommandArgs.ElementAt(0), out telegramId);
 
         if (CommandArgs.Count() != 1 || !resultParsing)
         {
-            ShowMessage.ShowAsConsole("Not valid command");
-            return await Task.FromResult(false);
+            return await Task.FromResult(result);
         }
         
         var user = new User
@@ -41,9 +46,10 @@ public class AddUserCommand : Command
         await _userService.AddUserAsync(user);
 
 
-        ShowMessage.ShowAsConsole("Save user successful");
+        result.IsSuccessful = true;
+        result.Message = "User signed in";
 
 
-        return await Task.FromResult(true);
+        return await Task.FromResult(result);
     }
 }

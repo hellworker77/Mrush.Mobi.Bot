@@ -6,7 +6,7 @@ namespace Requests.Implementation;
 
 public class UnKnownRequest : Request
 {
-    public UnKnownRequest(IShowMessage showMessage, IBrowser browser) : base(showMessage, browser)
+    public UnKnownRequest(IShowMessage showMessage, IWebDriver webDriver) : base(showMessage, webDriver)
     {
     }
 
@@ -17,9 +17,9 @@ public class UnKnownRequest : Request
         return true;
     }
 
-    protected override async Task<bool> InternalRequest()
+    protected override async Task<string> InternalRequestExecute()
     {
-        var result = true;
+        var result = string.Empty;
 
         ShowMessage.ShowError("Not found request");
 
