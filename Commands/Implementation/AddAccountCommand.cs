@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 using Commands.Abstraction;
+using Commands.Models;
 using Core.Abstraction.Interfaces;
 using Domain.Abstraction.Interfaces;
 using Domain.Models;
@@ -20,16 +21,21 @@ public class AddAccountCommand : Command
     {
         return input.Contains(CommandString);
     }
-    protected override async Task<bool> InternalCommand()
+    protected override async Task<CommandResult> InternalCommandExecute()
     {
-        long telegramId = 0;
+        long telegramId;
+
+        var result = new CommandResult
+        {
+            IsSuccessful = false,
+            Message = "Account didn't create"
+        };
 
         var resultParsing = long.TryParse(CommandArgs.ElementAt(0), out telegramId);
 
         if (CommandArgs.Count() != 3 || !resultParsing)
         {
-            ShowMessage.ShowAsConsole("Not valid command");
-            return await Task.FromResult(false);
+            return await Task.FromResult(result);
         }
 
         var account = new Account()
@@ -37,10 +43,11 @@ public class AddAccountCommand : Command
             Login = CommandArgs.ElementAt(1),
             Password = CommandArgs.ElementAt(2)
         };
-        
+        result.IsSuccessful = true;
+        result.Message = "Account created";
 
         await _userService.AddAccountAsync(telegramId, account);
-        return await Task.FromResult(true);
+        return await Task.FromResult(result);
 
     }
 }

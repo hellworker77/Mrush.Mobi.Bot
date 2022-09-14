@@ -8,15 +8,15 @@ public abstract class Request
 {
     protected bool IsTerminatingCommand;
     protected readonly IShowMessage ShowMessage;
-    protected readonly IBrowser Browser;
+    protected readonly IWebDriver WebDriver;
     protected string RequestAddress;
 
     protected Request(IShowMessage showMessage,
-        IBrowser browser)
+        IWebDriver webDriver)
     {
         IsTerminatingCommand = false;
         ShowMessage = showMessage;
-        Browser = browser;
+        WebDriver = webDriver;
         RequestAddress = string.Empty;
         RequestArgs = new List<string>();
     }
@@ -27,23 +27,24 @@ public abstract class Request
     {
         return RequestString.Contains(input.ToLower());
     }
-    public async Task<bool> SendRequestAsync()
+    public async Task<string> SendRequestAsync()
     {
-        return await InternalRequest();
+        return await InternalRequestExecute();
     }
     public virtual void ImportRequestArgs(string request, char separator)
     {
         var args = request.Split(separator).ToList();
 
+
         RequestArgs = args;
     }
-    protected abstract Task<bool> InternalRequest();
+    protected abstract Task<string> InternalRequestExecute();
 
     public static Func<IServiceProvider, Func<string, Request>> GetRequest =>
         provider => input =>
         {
-            var command = provider.GetServices<Request>().First(c => c.IsRequestFor(input));
+            var request = provider.GetServices<Request>().First(c => c.IsRequestFor(input));
 
-            return command;
+            return request;
         };
 }

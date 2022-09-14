@@ -6,7 +6,6 @@ namespace Host.Implementation;
 
 public class Runtime : IRuntime
 {
-    private bool _isRunning;
     private readonly IShowMessage _showMessage;
     private readonly ITimer _timer;
     private readonly Func<string, Command> _commandFactory;
@@ -25,7 +24,7 @@ public class Runtime : IRuntime
 
     public async Task RunAsync()
     {
-
+        
     }
     public async Task ApplyCommand(string command)
     {
@@ -65,14 +64,14 @@ public class Runtime : IRuntime
 
         command.ImportCommandArgs(currentCommand, separator);
 
-        var response = await command.RunCommand();
-
-        IsRunning = !response.shouldQuit;
+        var response = await command.RunCommandAsync();
+        _showMessage.ShowAsConsole($"{response.Message} develop:({response.IsSuccessful.ToString().ToLower()})");
+        IsRunning = !response.IsTerminating;
     }
     public bool IsRunning
     {
-        get => _isRunning;
-        private set => _isRunning = value;
+        get;
+        private set;
     }
 
 }

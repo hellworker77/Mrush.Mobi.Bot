@@ -1,6 +1,6 @@
 ﻿namespace Domain.Abstraction.Interfaces;
 
-public interface IBrowser
+public interface IWebDriver
 {
     public HttpClient Client { get; }
     public HttpResponseMessage Response { get; }

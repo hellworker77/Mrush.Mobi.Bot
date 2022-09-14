@@ -1,4 +1,5 @@
-﻿using Domain.Abstraction.Interfaces;
+﻿using Commands.Models;
+using Domain.Abstraction.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 namespace Commands.Abstraction;
 
@@ -29,12 +30,14 @@ public abstract class Command
         CommandArgs = args;
     }
 
-    public async Task<(bool wasSuccessful, bool shouldQuit)> RunCommand()
+    public async Task<CommandResult> RunCommandAsync()
     {
-        return (await InternalCommand(), IsTerminatingCommand);
+        var result = await InternalCommandExecute();
+        result.IsTerminating = IsTerminatingCommand;
+        return result;
     }
 
-    protected abstract Task<bool> InternalCommand();
+    protected abstract Task<CommandResult> InternalCommandExecute();
 
     public static Func<IServiceProvider, Func<string, Command>> GetCommand =>
         provider => input =>

@@ -65,7 +65,7 @@ public class DetourAntiBotSystem : IDetourAntiBotSystem
         catch (FormatException ex)
         {
             _showMessage.ShowError($"{ex.Message}");
-            _showMessage.ShowError("Not hacked login page...");
+            _showMessage.ShowError("Not found internal key...");
         }
 
         return await Task.FromResult(internalKey);
@@ -85,5 +85,5 @@ public class DetourAntiBotSystem : IDetourAntiBotSystem
 
         return foundKey;
     }
-
+    
 }

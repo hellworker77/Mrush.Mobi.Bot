@@ -1,6 +1,7 @@
 ﻿using Domain.Abstraction;
 using Domain.Abstraction.Interfaces;
 using Fizzler.Systems.HtmlAgilityPack;
+using Newtonsoft.Json;
 
 namespace Domain.Implementation.Parsers;
 
@@ -11,11 +12,9 @@ public class UnKnownParser : Parser
 
     }
 
-    public override bool Parse(string response)
+    public override string Parse(string response)
     {
-        var result = false;
-
-        return result;
+        return JsonConvert.SerializeObject(false);
     }
 
     protected override bool IsParserFor(string parserName)

@@ -3,13 +3,13 @@ using System.Net;
 
 namespace Domain.Implementation;
 
-public class Browser : IBrowser
+public class WebDriver : IWebDriver
 {
     private CookieContainer _cookies = new CookieContainer();
     private HttpClientHandler _handler = new HttpClientHandler();
     private HttpClient _client;
     private readonly IShowMessage _showMessage;
-    public Browser(IShowMessage showMessage)
+    public WebDriver(IShowMessage showMessage)
     {
         _showMessage = showMessage;
         Initialize();

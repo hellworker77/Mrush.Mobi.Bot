@@ -1,6 +1,8 @@
-﻿using Domain.Abstraction;
+﻿using System.Text.Json.Nodes;
+using Domain.Abstraction;
 using Domain.Abstraction.Interfaces;
 using Fizzler.Systems.HtmlAgilityPack;
+using Newtonsoft.Json;
 
 namespace Domain.Implementation.Parsers;
 
@@ -11,13 +13,13 @@ public class ParserPing : Parser
 
     }
 
-    public override bool Parse(string response)
+    public override string Parse(string response)
     {
         var result = false;
 
         result = !response.Contains("welcome");
         
-        return result;
+        return JsonConvert.SerializeObject(result);
     }
 
     protected override bool IsParserFor(string parserName)

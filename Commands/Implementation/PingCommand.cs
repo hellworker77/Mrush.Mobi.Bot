@@ -1,5 +1,7 @@
 ﻿using Commands.Abstraction;
+using Commands.Models;
 using Domain.Abstraction.Interfaces;
+using Newtonsoft.Json;
 using Requests.Abstraction;
 
 namespace Commands.Implementation;
@@ -7,31 +9,26 @@ namespace Commands.Implementation;
 public class PingCommand : Command
 {
     private readonly Func<string, Request> _requestFactory;
-    private readonly IBrowser _browser;
     public PingCommand(IShowMessage showMessage,
-        Func<string, Request> requestFactory,
-        IBrowser browser) : base(showMessage)
+        Func<string, Request> requestFactory) : base(showMessage)
     {
         _requestFactory = requestFactory;
-        _browser = browser;
     }
 
     protected override string CommandString => "ping";
-    protected override async Task<bool> InternalCommand()
+    protected override async Task<CommandResult> InternalCommandExecute()
     {
         var request = _requestFactory("ping");
 
-        var requestResult = await request.SendRequestAsync();
+        var requestSerializedResult = await request.SendRequestAsync();
+        var deserialized = JsonConvert.DeserializeObject<bool>(requestSerializedResult);
 
-        if (requestResult)
+        var result = new CommandResult
         {
-            ShowMessage.ShowInfo($"Your are authorized");
-        }
-        else
-        {
-            ShowMessage.ShowInfo($"Your are not authorized");
-        }
+            IsSuccessful = deserialized,
+            Message = deserialized ? "You are authorized" : "You are not authorized"
+        };
 
-        return true;
+        return result;
     }
 }

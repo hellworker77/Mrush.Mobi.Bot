@@ -1,4 +1,5 @@
 ﻿using Commands.Abstraction;
+using Commands.Models;
 using Domain.Abstraction.Interfaces;
 
 namespace Commands.Implementation;
@@ -15,12 +16,15 @@ public class ShutdownCommand : Command
 
 
     protected override string CommandString => "shutdown";
-    protected override async Task<bool> InternalCommand()
+    protected override async Task<CommandResult> InternalCommandExecute()
     {
-        ShowMessage.ShowInfo("shutdown...");
         await _timer.StopAsync();
-        ShowMessage.ShowInfo("stopped");
+        var result = new CommandResult
+        {
+            IsSuccessful = true,
+            Message = "Server stopped"
+        };
 
-        return await Task.FromResult(true);
+        return await Task.FromResult(result);
     }
 }

@@ -1,5 +1,7 @@
 ﻿using Commands.Abstraction;
+using Commands.Models;
 using Domain.Abstraction.Interfaces;
+using Newtonsoft.Json;
 using Requests.Abstraction;
 
 namespace Commands.Implementation;
@@ -7,13 +9,10 @@ namespace Commands.Implementation;
 public class SignInCommand : Command
 {
     private readonly Func<string, Request> _requestFactory;
-    private readonly IBrowser _browser;
     public SignInCommand(IShowMessage showMessage,
-        Func<string, Request> requestFactory,
-        IBrowser browser) : base(showMessage)
+        Func<string, Request> requestFactory) : base(showMessage)
     {
         _requestFactory = requestFactory;
-        _browser = browser;
     }
     protected override string CommandString => "signIn";
     protected override bool IsCommandFor(string input)
@@ -21,33 +20,30 @@ public class SignInCommand : Command
         return input.Contains(CommandString);
     }
 
-    protected override async Task<bool> InternalCommand()
+    protected override async Task<CommandResult> InternalCommandExecute()
     {
         var request = _requestFactory("signIn");
+        var result = new CommandResult
+        {
+            IsSuccessful = false,
+            Message = "Not valid command"
+        };
 
         if (CommandArgs.Count() != 2)
         {
-            ShowMessage.ShowAsConsole("Not valid command");
-            return false;
+            return result;
         }
         var name = CommandArgs.ElementAt(0);
         var password = CommandArgs.ElementAt(1);
 
         request.ImportRequestArgs($"{name}|{password}", '|');
 
-        var requestResult = await request.SendRequestAsync();
+        var requestSerializedResult = await request.SendRequestAsync();
+        var deserialized = JsonConvert.DeserializeObject<bool>(requestSerializedResult);
 
-        if (requestResult)
-        {
-            ShowMessage.ShowInfo($"Your are authorized");
-        }
-        else
-        {
-            ShowMessage.ShowInfo($"Your are not authorized");
-        }
+        result.IsSuccessful = deserialized;
+        result.Message = deserialized ? "You are authorized" : "You sent wrong login or password";
 
-        
-
-        return true;
+        return result;
     }
 }
